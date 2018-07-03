@@ -1,0 +1,2 @@
+
+void inc_test();
