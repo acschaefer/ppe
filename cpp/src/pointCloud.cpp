@@ -1,6 +1,6 @@
 #include <pointCloud.h>
 
-namespace ple {
+namespace ppe {
 
 void pointCloud::resize(uint32_t width, uint32_t height) {
   this->width = width;

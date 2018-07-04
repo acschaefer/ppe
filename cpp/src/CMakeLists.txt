@@ -11,6 +11,7 @@ target_link_libraries (pcd_write ${PCL_LIBRARIES})
 add_library(ppe SHARED
   inc_test.cpp
   pcdraw.cpp
+  pcextrpln.cpp
   pointCloud.cpp
   ptxread.cpp
 )

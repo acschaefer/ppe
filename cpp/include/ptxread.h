@@ -1,11 +1,9 @@
 #ifndef PTXREAD_H_
 #define PTXREAD_H_
 
-#include <Eigen/Dense>
-
 #include <pointCloud.h>
 
-namespace ple {
+namespace ppe {
 pointCloud* ptxread(std::string filename);
 }
 

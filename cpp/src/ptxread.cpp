@@ -3,7 +3,7 @@
 
 #include <ptxread.h>
 
-namespace ple {
+namespace ppe {
 pointCloud* ptxread(std::string filename) {
 
   std::cout << "INFO: Reading PCL file: " << filename << std::endl;

@@ -7,7 +7,7 @@
 #include <pcl/io/pcd_io.h>
 //#include <pcl/point_types.h>
 
-namespace ple {
+namespace ppe {
 class pointCloud {
 public:
   uint32_t width;

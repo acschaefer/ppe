@@ -4,7 +4,7 @@
 
 #include <pcdraw.h>
 
-namespace ple {
+namespace ppe {
   void pcdraw(pointCloud* pc) {
 
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud = pc->createPCLcloud();

@@ -3,7 +3,7 @@
 
 #include <pointCloud.h>
 
-namespace ple {
+namespace ppe {
   void pcdraw(pointCloud* pc);
 }
 
