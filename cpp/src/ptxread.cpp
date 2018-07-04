@@ -25,6 +25,8 @@ pointCloud* ptxread(std::string filename) {
     } else if (il == 1) {
       iss >> height;
       // TODO check availability of intensity / color
+      //height = 2;
+      //width = 3;
       pc->resize(width, height);
     } else if (il >= 10 && il-10 >= width*height) {
       std::cout << "WARNING: Found more points than width*height. Stopping file reading." << std::endl;

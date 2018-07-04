@@ -10,6 +10,13 @@ void pointCloud::resize(uint32_t width, uint32_t height) {
   Color.resize(width * height, 3);
 }
 
+std::pair<uint32_t, uint32_t> pointCloud::subscript(uint32_t ip) {
+  uint32_t row = ip / width;
+  uint32_t col = ip % width;
+  std::pair<uint32_t, uint32_t> sub(row, col);
+  return sub;
+}
+
 pcl::PointCloud<pcl::PointXYZRGB>::Ptr pointCloud::createPCLcloud() {
   pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGB>());
   cloud->is_dense = false;

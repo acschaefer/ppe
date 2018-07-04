@@ -16,6 +16,7 @@ public:
   Eigen::Matrix<uint8_t, -1, -1> Color;
 
   void resize(uint32_t width, uint32_t height);
+  std::pair<uint32_t, uint32_t> subscript(uint32_t ip);
 
   // TODO check for PCL
   pcl::PointCloud<pcl::PointXYZRGB>::Ptr createPCLcloud();
