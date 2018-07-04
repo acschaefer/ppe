@@ -1,6 +1,12 @@
-#include <pcl/io/pcd_io.h>
-#include <pcl/point_types.h>
+#ifndef PTXREAD_H_
+#define PTXREAD_H_
+
+#include <Eigen/Dense>
+
+#include <pointCloud.h>
 
 namespace ple {
-  pcl::PointCloud<pcl::PointXYZRGB>::Ptr ptxread(std::string filename);
+pointCloud* ptxread(std::string filename);
 }
+
+#endif /* PTXREAD_H_ */
