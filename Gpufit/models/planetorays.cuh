@@ -178,7 +178,7 @@ __device__ void calculate_planetorays(
     REAL * vector = vector_data + 12 * (chunk_begin + fit_begin + point_index);
 
     // value and derivatives
-    
+
     rayxpln(
       vector + 0,
       vector + 3,
@@ -186,11 +186,11 @@ __device__ void calculate_planetorays(
       parameters[0],
       parameters[1],
       parameters[2],
-      vector + 9,
+      vector + 3 * point_index,
       value[point_index],
-      derivative[point_index + 0],
-      derivative[point_index + 1],
-      derivative[point_index + 2]);
+      derivative[point_index + 0 * n_points],
+      derivative[point_index + 1 * n_points],
+      derivative[point_index + 2 * n_points]);
 }
 
 #endif

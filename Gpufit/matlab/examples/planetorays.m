@@ -9,7 +9,7 @@ function planetorays()
 assert(gpufit_cuda_available(), 'CUDA not available');
 
 %% number of fits and fit points
-number_fits = 1e3;
+number_fits = 1e6;
 number_parameters = 3;
 
 %% set input arguments
@@ -24,7 +24,7 @@ rng(0);
 initial_parameters = repmat(single(ones(size(true_parameters'))), [1, number_fits]);
 
 % generate data with Poisson noise
-data = single([10; 20; 20; 12]);
+data = single([10; 20; 30; 8]);
 data = repmat(data(:), [1, number_fits]);
 data = poissrnd(data);
 
@@ -51,11 +51,6 @@ model_id = ModelID.PLANETORAYS;
 %% displaying results
 display_results('Plane to rays', model_id, number_fits, number_parameters, time, true_parameters, parameters, states, chi_squares, n_iterations);
 
-end
-
-
-function g = linear_1d(x, p)
-g = p(1) + p(2) * x;
 end
 
 function display_results(name, model_id, number_fits, number_parameters, time, true_parameters, parameters, states, chi_squares, n_iterations)
