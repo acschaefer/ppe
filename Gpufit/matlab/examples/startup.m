@@ -1,1 +1,2 @@
+addpath('.');
 addpath('../../../build/matlab/');

@@ -21,7 +21,7 @@ true_parameters = single([10, 5]);
 % initialize random number generator
 rng(0);
 
-% initial parameters (can be randomized)
+% initial parameters (could also be randomized)
 initial_parameters = repmat(single(ones(size(true_parameters'))), [1, number_fits]);
 
 % generate x values
@@ -43,7 +43,6 @@ max_n_iterations = 20;
 estimator_id = EstimatorID.MLE;
 
 % model ID
-%model_id = ModelID.PLANETORAYS;
 model_id = ModelID.LINEAR_1D;
 
 %% run Gpufit

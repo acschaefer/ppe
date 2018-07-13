@@ -166,34 +166,31 @@ __device__ void calculate_planetorays(
     char * user_info,
     std::size_t const user_info_size)
 {
+    // parameters:  3 plane ranges
+    // data:        1 ray range (to calc chi2)
+    // user info:   12 = (3 plane + 1 ray) vectors
+    
     // indices
 
-    REAL * user_info_float = (REAL*) user_info;
-    REAL x = 0;
-    if (!user_info_float)
-    {
-        x = point_index;
-    }
-    else if (user_info_size / sizeof(REAL) == n_points)
-    {
-        x = user_info_float[point_index];
-    }
-    else if (user_info_size / sizeof(REAL) > n_points)
-    {
-        int const chunk_begin = chunk_index * n_fits * n_points;
-        int const fit_begin = fit_index * n_points;
-        x = user_info_float[chunk_begin + fit_begin + point_index];
-    }
+    int const chunk_begin = chunk_index * n_fits * n_points;
+    int const fit_begin = fit_index * n_points; 
+    REAL * vector_data = (REAL*) user_info;
+    REAL * vector = vector_data + 12 * (chunk_begin + fit_begin + point_index);
 
-    // value
+    // value and derivatives
     
-    value[point_index] = 1*parameters[0] + parameters[1] * x;
-
-    // derivatives
-
-    REAL * current_derivatives = derivative + point_index;
-    current_derivatives[0 * n_points] = 1;
-    current_derivatives[1 * n_points] = x;
+    rayxpln(
+      vector + 0,
+      vector + 3,
+      vector + 6,
+      parameters[0],
+      parameters[1],
+      parameters[2],
+      vector + 9,
+      value[point_index],
+      derivative[point_index + 0],
+      derivative[point_index + 1],
+      derivative[point_index + 2]);
 }
 
 #endif

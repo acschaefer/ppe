@@ -9,29 +9,28 @@ function planetorays()
 assert(gpufit_cuda_available(), 'CUDA not available');
 
 %% number of fits and fit points
-number_fits = 1e4;
-size_x = 20;
-number_parameters = 2;
+number_fits = 1e3;
+number_parameters = 3;
 
 %% set input arguments
 
 % true parameters
-true_parameters = single([10, 5]);
+true_parameters = single([10, 20, 20]);
 
 % initialize random number generator
 rng(0);
 
-% initial parameters (can be randomized)
+% initial parameters
 initial_parameters = repmat(single(ones(size(true_parameters'))), [1, number_fits]);
 
-% generate x values
-g = single(0 : size_x - 1);
-x = ndgrid(g);
-
 % generate data with Poisson noise
-data = linear_1d(x, true_parameters);
+data = single([10; 20; 20; 12]);
 data = repmat(data(:), [1, number_fits]);
 data = poissrnd(data);
+
+% 3 plane and 1 ray vector
+user_info = single([1 0 0 0 1 0 0 0 1 1 1 1]);
+user_info = repmat(user_info(:), [1, number_fits]);
 
 % tolerance
 tolerance = 1e-3;
@@ -44,14 +43,13 @@ estimator_id = EstimatorID.MLE;
 
 % model ID
 model_id = ModelID.PLANETORAYS;
-%model_id = ModelID.LINEAR_1D;
 
 %% run Gpufit
 [parameters, states, chi_squares, n_iterations, time] = gpufit(data, [], ...
-    model_id, initial_parameters, tolerance, max_n_iterations, [], estimator_id, []);
+    model_id, initial_parameters, tolerance, max_n_iterations, [], estimator_id, user_info);
 
 %% displaying results
-display_results('Plane to rays', model_id, number_fits, number_parameters, size_x, time, true_parameters, parameters, states, chi_squares, n_iterations);
+display_results('Plane to rays', model_id, number_fits, number_parameters, time, true_parameters, parameters, states, chi_squares, n_iterations);
 
 end
 
@@ -60,7 +58,7 @@ function g = linear_1d(x, p)
 g = p(1) + p(2) * x;
 end
 
-function display_results(name, model_id, number_fits, number_parameters, size_x, time, true_parameters, parameters, states, chi_squares, n_iterations)
+function display_results(name, model_id, number_fits, number_parameters, time, true_parameters, parameters, states, chi_squares, n_iterations)
 
 %% displaying results
 converged = states == 0;
@@ -69,7 +67,6 @@ fprintf('\nGpufit of %s\n', name);
 % print summary
 fprintf('\nmodel ID:        %d\n', model_id);
 fprintf('number of fits:  %d\n', number_fits);
-fprintf('fit size:        %d x %d\n', size_x, size_x);
 fprintf('mean chi-square: %6.2f\n', mean(chi_squares(converged)));
 fprintf('mean iterations: %6.2f\n', mean(n_iterations(converged)));
 fprintf('time:            %6.2f s\n', time);
