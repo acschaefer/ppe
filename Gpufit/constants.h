@@ -11,7 +11,8 @@ enum ModelID {
     CAUCHY_2D_ELLIPTIC = 4,
     LINEAR_1D = 5,
     FLETCHER_POWELL_HELIX = 6,
-    BROWN_DENNIS = 7
+    BROWN_DENNIS = 7,
+    PLANETORAYS = 8
 };
 
 // estimator ID

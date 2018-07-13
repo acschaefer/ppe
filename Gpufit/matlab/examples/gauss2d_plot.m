@@ -35,7 +35,7 @@ max_n_iterations = 10;
 model_id = ModelID.GAUSS_2D;
 
 %% loop over different number of fits
-n_fits_all = round(logspace(2, 6, 20));
+n_fits_all = round(logspace(2, 8, 19));
 
 % generate x and y values
 g = single(0 : size_x - 1);
