@@ -167,7 +167,7 @@ __device__ void calculate_planetorays(
     std::size_t const user_info_size)
 {
     // parameters:  3 plane ranges
-    // data:        1 ray range (to calc chi2)
+    // data:        1 range (one of the 3 planes or ray to calc chi2)
     // user info:   12 = (3 plane + 1 ray) vectors
     
     // indices
@@ -175,7 +175,7 @@ __device__ void calculate_planetorays(
     int const chunk_begin = chunk_index * n_fits * n_points;
     int const fit_begin = fit_index * n_points; 
     REAL * vector_data = (REAL*) user_info;
-    REAL * vector = vector_data + 12 * (chunk_begin + fit_begin + point_index);
+    REAL * vector = vector_data + 3 * (chunk_begin + fit_begin);
 
     // value and derivatives
 
