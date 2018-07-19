@@ -22,9 +22,10 @@ cd gpufit_ppe/
 mkdir build
 cd build/
 cmake -DCMAKE_BUILD_TYPE=RELEASE -DCUDA_ARCHITECTURES=6.1 ..
+make -j8
 cd ../Gpufit/matlab/examples/
 export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 matlab
 ```
 
-In matlab run `planetorays` for an example.
+In matlab run `planetorays` for an example. Alternatively, load the PPE directory, modify the last line of `extrpln.m` to use gpu fitting and run `extrpln`.
