@@ -43,6 +43,7 @@ public:
 
     int max_threads_;
     int warp_size_;
+    int shared_mem_size_;
 
     DataLocation data_location_;
 

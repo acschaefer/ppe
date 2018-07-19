@@ -8,6 +8,7 @@ void Info::get_gpu_properties()
     max_threads_ = devProp.maxThreadsPerBlock;
     max_blocks_ = devProp.maxGridSize[0];
     warp_size_ = devProp.warpSize;
+    shared_mem_size_ = devProp.sharedMemPerBlock;
 
     std::size_t free_bytes;
     std::size_t total_bytes;
