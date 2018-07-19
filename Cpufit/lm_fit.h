@@ -97,6 +97,8 @@ private:
     void calc_values_brown_dennis(std::vector<REAL>& values);
     void calc_derivatives_brown_dennis(std::vector<REAL> & derivatives);
 
+    void calc_planetorays(std::vector<REAL>& values, std::vector<REAL> & derivatives);
+
     void calculate_hessian(std::vector<REAL> const & derivatives,
         std::vector<REAL> const & curve);
 
