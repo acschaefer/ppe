@@ -9,37 +9,50 @@ function planetorays()
 assert(gpufit_cuda_available(), 'CUDA not available');
 
 %% number of fits and fit points
-number_fits = 1e6;
+number_fits = 1e5;
 number_parameters = 3;
 
 %% set input arguments
 
 % true parameters
-true_parameters = single([10, 20, 20]);
+true_parameters = double([10, 20, 20]);
 
 % initialize random number generator
 rng(0);
 
 % initial parameters
-initial_parameters = repmat(single(ones(size(true_parameters'))), [1, number_fits]);
+initial_parameters = repmat(double(ones(size(true_parameters'))), [1, number_fits]);
 
 % generate data with Poisson noise
-data = single([10; 20; 30; 8]);
+%data = double([10; 20; 30; 5.5]);
+data = double([10; 20; 30; 10]);
 data = repmat(data(:), [1, number_fits]);
-data = poissrnd(data);
+data = data .* (1 + 0.001 * linspace(1, number_fits, number_fits));
+%data = poissrnd(data);
 
-% 3 plane and 1 ray vector
-user_info = single([1 0 0 0 1 0 0 0 1 1 1 1]);
-user_info = repmat(user_info(:), [1, number_fits]);
+% 3 plane vectors and 3+1 ray vectors
+%user_info = double([1 0 0 0 1 0 0 0 1 1 1 1]);
+%user_info = double([1 0 0 0 1 0 0 0 1 1 0 0]);
+%user_info = repmat([user_info(1:9), user_info], [1, number_fits]);
+for i = 1:number_fits
+   r1 = rand();
+   r2 = rand();
+   r3 = rand();
+   r1a = sqrt(1 - r1*r1);
+   r2a = sqrt(1 - r2*r2);
+   r3a = sqrt(1 - r3*r3);
+   vecs = double([r1 r1a 0 0 r2 r2a r3a 0 r3 r1 r1a 0]);
+   user_info(:,i) = [vecs(1:9), vecs]';
+end
 
 % tolerance
-tolerance = 1e-3;
+tolerance = double(1e-6);
 
 % maximum number of iterations
 max_n_iterations = 20;
 
 % estimator id
-estimator_id = EstimatorID.MLE;
+estimator_id = EstimatorID.LSE;
 
 % model ID
 model_id = ModelID.PLANETORAYS;
