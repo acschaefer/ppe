@@ -7,7 +7,7 @@ Modified version of [Gpufit](https://github.com/gpufit/Gpufit) to accommodate pl
 Successfully tested using the following:
 
 * CMake 3.11
-* CUDA 8.0
+* CUDA Toolkit 8.0
 * Matlab R2017b
 
 Newer and some older versions might work as well.
