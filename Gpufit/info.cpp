@@ -36,17 +36,22 @@ void Info::set_number_of_parameters_to_fit(int const * const parameters_to_fit)
     }
 }
 
+#include <iostream>
+
 void Info::set_fits_per_block(std::size_t const current_chunk_size)
 {
 
     n_fits_per_block_ = std::max((max_threads_ / power_of_two_n_points_), 1);
+    int mem_per_fit = 2 * user_info_size_ / n_fits_; // factor 2 for safety
 
     bool is_divisible = current_chunk_size % n_fits_per_block_ == 0;
+    bool enough_mem = shared_mem_size_ > mem_per_fit * n_fits_per_block_;
 
-    while (!is_divisible && (n_fits_per_block_ > 1))
+    while ((!is_divisible || !enough_mem) && (n_fits_per_block_ > 1))
     {
         n_fits_per_block_ -= 1;
         is_divisible = current_chunk_size % n_fits_per_block_ == 0;
+	enough_mem = shared_mem_size_ > mem_per_fit * n_fits_per_block_;
     }
 
 }
