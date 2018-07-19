@@ -1,6 +1,7 @@
 #include "cpufit.h"
 #include "../Gpufit/constants.h"
 #include "lm_fit.h"
+#include "../Gpufit/models/rayxpln.h"
 
 #include <vector>
 #include <numeric>
@@ -541,6 +542,39 @@ void LMFitCPP::calc_values_brown_dennis(std::vector<REAL>& values)
     }
 }
 
+void LMFitCPP::calc_planetorays(std::vector<REAL>& values, std::vector<REAL>& derivatives)
+{
+    // parameters:  3 plane ranges
+    // user info:   3 plane vectors + n_points ray vectors (each vector has 3 REALs)
+    // value:       1 range (corresponding to one of the n_points ray vectors)
+
+    // indices
+
+    int const v_size = 3;
+    int const v_data_size = (3 + info_.n_points_) * v_size;
+    int const fit_begin = fit_index_ * v_data_size;
+    REAL * vectors = (REAL*) user_info_ + fit_begin;
+
+    // value and derivatives
+
+    for (std::size_t point_index = 0; point_index < info_.n_points_; point_index++)
+    {
+    rayxpln(
+      vectors + 0 * v_size,
+      vectors + 1 * v_size,
+      vectors + 2 * v_size,
+      parameters_[0],
+      parameters_[1],
+      parameters_[2],
+      vectors + (3 + point_index) * v_size,
+      values[point_index],
+      derivatives[point_index + 0 * info_.n_points_],
+      derivatives[point_index + 1 * info_.n_points_],
+      derivatives[point_index + 2 * info_.n_points_]);
+    }
+
+}
+
 void LMFitCPP::calc_curve_values(std::vector<REAL>& curve, std::vector<REAL>& derivatives)
 {           
     if (info_.model_id_ == GAUSS_1D)
@@ -582,6 +616,10 @@ void LMFitCPP::calc_curve_values(std::vector<REAL>& curve, std::vector<REAL>& de
     {
         calc_values_brown_dennis(curve);
         calc_derivatives_brown_dennis(derivatives);
+    }
+    else if (info_.model_id_ == PLANETORAYS)
+    {
+	calc_planetorays(curve, derivatives);
     }
 }
 

@@ -97,6 +97,9 @@ void FitInterface::set_number_of_parameters(ModelID const model_id)
     case BROWN_DENNIS:
         n_parameters_ = 4;
         break;
+    case PLANETORAYS:
+        n_parameters_ = 3;
+        break;
     default:
         break;
     }
