@@ -1,5 +1,5 @@
 function [parameters, states, chi_squares, n_iterations, time]...
-    = gpufit(data, weights, model_id, initial_parameters, tolerance, max_n_iterations, parameters_to_fit, estimator_id, user_info)
+    = gpufit(data, weights, model_id, initial_parameters, tolerance, max_n_iterations, parameters_to_fit, estimator_id, user_info, user_info_size)
 % Wrapper around the Gpufit mex file.
 %
 % Optional arguments can be given as empty matrix [].
@@ -9,6 +9,8 @@ function [parameters, states, chi_squares, n_iterations, time]...
 %% size checks
 
 % number of input parameter (variable)
+if nargin < 10
+    user_info_size = 0;
 if nargin < 9
     user_info = [];
     if nargin < 8
@@ -24,6 +26,7 @@ if nargin < 9
             end
         end
     end
+end
 end
 
 % data is 2D and read number of points and fits
@@ -97,7 +100,7 @@ if ~isa(tolerance, 'double')
 end
 
 % we don't check type of user_info, but we extract the size in bytes of it
-if ~isempty(user_info)
+if ~isempty(user_info) && user_info_size == 0
     user_info_info = whos('user_info');
     user_info_size = user_info_info.bytes;
 else
