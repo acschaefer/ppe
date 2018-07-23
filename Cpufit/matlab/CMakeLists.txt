@@ -41,7 +41,6 @@ add_matlab_launcher( CpufitMex "${CMAKE_CURRENT_SOURCE_DIR}" )
 set( build_directory "${CMAKE_BINARY_DIR}/${CMAKE_CFG_INTDIR}/matlab" )
 set( package_files
   "${CMAKE_CURRENT_SOURCE_DIR}/cpufit.m"
-  "${CMAKE_CURRENT_SOURCE_DIR}/cpufit_c.m"
 )
 set( binary_gpufit $<TARGET_FILE:Cpufit> )
 set( binary_mex $<TARGET_FILE:CpufitMex> )
