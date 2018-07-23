@@ -1,73 +1,39 @@
 #ifndef GPUFIT_PLANETORAYS_CUH_INCLUDED
 #define GPUFIT_PLANETORAYS_CUH_INCLUDED
 
-/* Description of the calculate_linear1d function
+/* Description of the calculate_planetorays function
 * ===================================================
 *
-* This function calculates the values of one-dimensional linear model functions
-* and their partial derivatives with respect to the model parameters. 
+* This function calculates the radius of a ray intersecting a plane.
+* See rayxpln.h for details.
 *
-* This function makes use of the user information data to pass in the 
-* independent variables (X values) corresponding to the data.  The X values
-* must be of type REAL.
+* The parameters are the 3 ranges to define the plane, while the
+* corresponding 3 support vectors are provided in the user_info.
+* Further, the user_info contains a direction vector for each
+* provided data point (radius).
 *
-* Note that if no user information is provided, the (X) coordinate of the 
-* first data value is assumed to be (0.0).  In this case, for a fit size of 
-* M data points, the (X) coordinates of the data are simply the corresponding 
-* array index values of the data array, starting from zero.
-*
-* There are three possibilities regarding the X values:
-*
-*   No X values provided: 
-*
-*       If no user information is provided, the (X) coordinate of the 
-*       first data value is assumed to be (0.0).  In this case, for a 
-*       fit size of M data points, the (X) coordinates of the data are 
-*       simply the corresponding array index values of the data array, 
-*       starting from zero.
-*
-*   X values provided for one fit:
-*
-*       If the user_info array contains the X values for one fit, then 
-*       the same X values will be used for all fits.  In this case, the 
-*       size of the user_info array (in bytes) must equal 
-*       sizeof(REAL) * n_points.
-*
-*   Unique X values provided for all fits:
-*
-*       In this case, the user_info array must contain X values for each
-*       fit in the dataset.  In this case, the size of the user_info array 
-*       (in bytes) must equal sizeof(REAL) * n_points * nfits.
+* Hence, the user info is composed as:
+*     [V1_1, V2_1, V3_1, v1_1, ..., vN_1,
+*      ...
+*      V1_M, V2_M, V3_M, v1_M, ..., vN_M]
+* With:
+*     VX : Plane support vectors
+*     vX : Data point directional vectors
+*     N  : Number of data points per fit = n_points
+*     M  : Number of fits = n_fits
 *
 * Parameters:
 *
-* parameters: An input vector of model parameters.
-*             p[0]: offset
-*             p[1]: slope
-*
-* n_fits: The number of fits.
-*
-* n_points: The number of data points per fit.
-*
-* value: An output vector of model function values.
-*
-* derivative: An output vector of model function partial derivatives.
-*
-* point_index: The data point index.
-*
-* fit_index: The fit index.
-*
-* chunk_index: The chunk index. Used for indexing of user_info.
-*
-* user_info: An input vector containing user information.
-*
-* user_info_size: The size of user_info in bytes.
-*
-* Calling the calculate_linear1d function
-* =======================================
-*
-* This __device__ function can be only called from a __global__ function or an other
-* __device__ function.
+* parameters     : The 3 ranges defining the plane.
+* n_fits         : The number of fits.
+* n_points       : The number of data points per fit.
+* value          : Output radius of the ray-plane intersection.
+* derivative     : An output vector of model function partial derivatives.
+* point_index    : The data point index.
+* fit_index      : The fit index.
+* chunk_index    : The chunk index. Used for indexing of user_info.
+* user_info      : An input vector containing user information, see above.
+* user_info_size : The size of user_info in bytes.
 *
 */
 

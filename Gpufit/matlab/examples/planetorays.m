@@ -23,17 +23,22 @@ rng(0);
 % initial parameters
 initial_parameters = repmat(double(ones(size(true_parameters'))), [1, number_fits]);
 
-% generate data with Poisson noise
-%data = double([10; 20; 30; 5.5]);
+% generate data
 data = double([10; 20; 30; 10]);
 data = repmat(data(:), [1, number_fits]);
+
+% grow data linearly for validation purposes
 data = data .* (1 + 0.001 * linspace(1, number_fits, number_fits));
+
+% add Poisson noise to data
 %data = poissrnd(data);
 
-% 3 plane vectors and 3+1 ray vectors
+% 3 plane vectors and 3+1 ray vectors (fixed direction)
 %user_info = double([1 0 0 0 1 0 0 0 1 1 1 1]);
 %user_info = double([1 0 0 0 1 0 0 0 1 1 0 0]);
 %user_info = repmat([user_info(1:9), user_info], [1, number_fits]);
+
+% vectors with randomized directions
 for i = 1:number_fits
    r1 = rand();
    r2 = rand();

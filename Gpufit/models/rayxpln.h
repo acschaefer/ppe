@@ -12,21 +12,15 @@ void rayxpln(
   REAL & j3) {
 /*
 % RAYXPLN Radius of ray intersecting plane.
-%   R = RAYXPLN(V1,V2,V3,R1,R2,R3,V) computes the radius R of a ray
+%   R = RAYXPLN(V1,V2,V3,R1,R2,R3,V,R,J1,J2,J3) computes the radius R of a ray
 %   intersecting a plane. The ray is defined by the direction vector V. The
 %   plane is defined by the three points R1*V1, R2*V2, R3*V3. All rays
 %   originate in the same point with arbitrary coordinates.
 %
-%   R is a scalar. V1, V2, and V3 are 3-element row vectors. V is an Nx3
-%   matrix of direction vectors.
+%   R is a scalar. V1, V2, V3 and V are 3-element unit vectors.
 %
-%   [R,J] = RAYXPLN(...) also computes the Nx3 Jacobian of R with respect
-%   to R1, R2, R3.
+%   [J1, J2, J3] is the 1x3 Jacobian of R with respect to R1, R2, R3.
 %
-%   Example:
-%      [r,j] = rayxpln([1,0,0],[1,1,0],[1,0,1],3,4,5,rand(10,3))
-%
-%   See also LINXPLN.
   
 % Copyright 2018 Alexander Schaefer
 
