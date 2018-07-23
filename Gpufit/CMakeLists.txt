@@ -188,21 +188,6 @@ elseif( CUDA_VERSION VERSION_LESS "7.0" )
 	message( STATUS "CUBLAS: CUDA Version < 7.0 detected; USE_CUBLAS flag ignored." )
 endif()
 
-#install( TARGETS Gpufit RUNTIME DESTINATION bin )
-
-# Examples
-
-add_subdirectory( examples )
-
-# Tests
-
-if( BUILD_TESTING )
-	add_subdirectory( tests )
-endif()
-
 # Bindings
 
 add_subdirectory( matlab )
-add_subdirectory( python )
-add_subdirectory( java )
-
