@@ -36,4 +36,4 @@ To trigger the automatic evaluation of the data generated during the experiments
 The script [`ploteval.m`](./matlab/experiments/ploteval.m) finally visualizes the evaluation results.
 
 In order to accelerate the plane extraction process, it is recommended to compile the CUDA code in the `gpufit` folder.
-For instructions, see the corresponding [readme file](./gpufit/readme.md).
+For instructions, see the corresponding [readme file](./gpufit/README.md).
