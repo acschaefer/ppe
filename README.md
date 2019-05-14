@@ -18,7 +18,7 @@ This plane extraction algorithm takes an organized 3-D point cloud as input and 
 To extract planes from an organized point cloud, use the function [`pcextrpln`](./matlab/pcextrpln.m).
 For details about how to use [`pcextrpln`](./matlab/pcextrpln.m), please refer to the detailed documentation in the function header.
 
-## The synthetic plane extraction benchmark
+## [The synthetic plane extraction benchmark](http://synpeb.cs.uni-freiburg.de/)
 
 While testing our plane extraction algorithm and comparing it to other methods, we found out that the well established SegComp dataset exhibits several deficiencies, which are described in our paper.
 In order to create a new strong baseline, we created the synthetic plane extraction benchmark: SynPEB.
