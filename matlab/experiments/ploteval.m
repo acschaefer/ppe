@@ -3,7 +3,7 @@ function ploteval
 
 %% Load data.
 % Load evaluation data.
-evaluation = load(fullfile('pcd','result','planeextract','eval.mat'));
+evaluation = load(fullfile('result','eval.mat'));
 
 ngtall = evaluation.ngtall;
 nmsall = evaluation.nmsall;
@@ -136,7 +136,7 @@ function makeplt(title, ytitle, xtitle, fname, x, denom, ...
         "$\phantom{0}5\ \textup{mm}$", "$10\ \textup{mm}$", ...
         "$20\ \textup{mm}$", "$40\ \textup{mm}$"], ...
         'Interpreter', 'latex', 'Location', 'southeast')
-    fname = fullfile('pcd','result','planeextract',fname);
+    fname = fullfile('result',fname);
     savefig(fig, [fname, '.fig'])
     saveas(fig, [fname, '.png']);
     %matlab2tikz(sprintf('%s.tex', fname))

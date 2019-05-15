@@ -3,12 +3,12 @@ function evalexp
 
 %% Evaluate experimental results.
 % Load dataset.
-dataset = load(fullfile('pcd','data','planeextract','dataset_test.mat'));
+dataset = load(fullfile('data','dataset_test.mat'));
 pc = dataset.pc;
 gtang = dataset.gtang;
 
 % Load first experimental result file.
-plndata = load(fullfile('pcd','result','planeextract','extrpln_ids1.mat'));
+plndata = load(fullfile('result','extrpln_ids1.mat'));
 algorithmname = plndata.algorithmname;
 pln = plndata.pln;
 spln = size(pln);
@@ -67,7 +67,7 @@ for ids = idss
     fprintf("Running ids = %i\n", ids);
 
     % Load experimental results.
-    plndata = load(fullfile('pcd','result','planeextract',...
+    plndata = load(fullfile('result',...
         ['extrpln_ids', num2str(ids), '.mat']));
     pln = plndata.pln;
 
@@ -215,7 +215,7 @@ for ids = idss
 end
 
 %% Save evaluation.
-evalfile = fullfile('pcd','result','planeextract','eval.mat');
+evalfile = fullfile('result','eval.mat');
 save(evalfile, 'ngtall', 'ncorrseg', 'noverseg', ...
     'nundrseg', 'nmissseg', 'nnoisseg', 'angdiff', 'nangdiff', ...
     'fcorrseg', 'nmsall', 'rmsems', 'rmsegt', 'algorithmname');
