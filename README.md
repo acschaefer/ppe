@@ -29,11 +29,15 @@ Side view of the ground-truth segmentation of a SegComp scan
 
 ## How to repeat our experiments
 
-To verify our experimental results, please download SegComp and SynPEB.
-Then, navigate to the `matlab/experiments` folder.
-By running the script [`runexp.m`](./matlab/experiments/runexp.m), you perform the experiments.
-To trigger the automatic evaluation of the data generated during the experiments, please start the script [`evalexp.m`](./matlab/experiments/evalexp.m).
-The script [`ploteval.m`](./matlab/experiments/ploteval.m) finally visualizes the evaluation results.
+To verify our experimental results, follow the steps below.
+They have been tested for MATLAB R2018a.
+
+1. Open MATLAB and navigate to the `matlab` folder.
+1. Add all files in this folder to the MATLAB path.
+1. Run the script [`gendata.m`](./matlab/experiments/gendata.m) to download the SegComp and SynPEB dataset.
+1. Run the script [`runexp.m`](./matlab/experiments/runexp.m) to perform the experiments.
+1. To trigger the automatic evaluation of the data generated during the experiments, start the script [`evalexp.m`](./matlab/experiments/evalexp.m).
+1. Visualize the evaluation results by executing the script [`ploteval.m`](./matlab/experiments/ploteval.m).
 
 In order to accelerate the plane extraction process, it is recommended to compile the CUDA code in the `gpufit` folder.
 For instructions, see the corresponding [readme file](./gpufit/README.md).
