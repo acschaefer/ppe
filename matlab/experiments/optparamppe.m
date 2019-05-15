@@ -6,7 +6,7 @@ function optparamppe
 algorithmname = 'ppe'; %#ok<NASGU>
 
 % Create the output directory.
-outdir = fullfile('pcd','result','planeextract');
+outdir = 'result';
 [errorcode,msg] = mkdir(outdir);
 if errorcode < 1
     error(['Failed to create output directory ''', outdir, ''': ', msg])
@@ -17,7 +17,7 @@ resultfile = fullfile(outdir,'paramppe.mat');
 
 %% Optimize plane extraction parameters.
 % Read datasets.
-dataset = load(fullfile('pcd','data','planeextract','dataset_train.mat'));
+dataset = load(fullfile('data','dataset_train.mat'));
 pc = dataset.pc;
 gtang = dataset.gtang;
 nds = size(pc, 1);
@@ -38,7 +38,7 @@ try
     for ids = 1:nds
         [x(ids,:), y(ids), ~, ~] = patternsearch( ...
             @(x) evalmsac(pc(ids,:),gtang(ids,:),x), ...
-            x0, [], [], [], [], xlb, xub, opt);
+            x0, [], [], [], [], xlb, xub);
     end
 catch me
     % Save results before processing error.
@@ -69,7 +69,7 @@ ncorrseg = zeros(numel(pc), 1);
 pln = cell(size(pc));
 parfor i = 1 : numel(pc)
     % Extract planes from point cloud.
-    pln{i} = extrplnmsac(pc{i},x);
+    pln{i} = extrplnmsac(pc{i}, x);
     gti = unique(pc{i}.Intensity);
     gti = gti(gti >= 10);
     [~,ncorrseg(i)] = segcompeval(pc{i}, pln{i}, gtang{i}, tcomp);

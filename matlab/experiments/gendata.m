@@ -3,7 +3,7 @@ function gendata
 
 %% Create output directory.
 % Define directory where to write the dataset files.
-outdir = fullfile('pcd','data','planeextract');
+outdir = fullfile('data');
 
 % Create the output directory.
 [errorcode,msg] = mkdir(outdir);
@@ -19,8 +19,7 @@ url = 'figment.csee.usf.edu';
 srvfolder = 'pub/segmentation-comparison/';
 
 % Specify the path to the dataset on the local machine.
-datafolder = fullfile(fileparts(mfilename('fullpath')), '..', '..', ...
-    'data', 'segcomp');
+datafolder = fullfile('data', 'segcomp');
 tarfolder = fullfile(datafolder, srvfolder);
 zfolder = fullfile(datafolder, 'z');
 
@@ -103,8 +102,7 @@ end
 url = 'http://synpeb.cs.uni-freiburg.de/synpeb.zip';
 
 % Specify the path to the dataset on the local machine.
-datafolder = fullfile(fileparts(mfilename('fullpath')), '..', '..', ...
-    'data', 'synpeb');
+datafolder = fullfile('data', 'synpeb');
     
 % Download and uncompress the dataset.
 unzip(url, datafolder);
