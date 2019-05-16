@@ -3,7 +3,7 @@ function evalexp
 
 %% Evaluate experimental results.
 % Load dataset.
-dataset = load(fullfile('data','dataset_test.mat'));
+dataset = load(fullfile('..', 'data','dataset_test.mat'));
 pc = dataset.pc;
 gtang = dataset.gtang;
 

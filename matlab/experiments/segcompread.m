@@ -18,7 +18,7 @@ function [pc,gtang] = segcompread(file, varargin)
 %
 %   Example:
 %      gendata
-%      pc = segcompread(fullfile('pcd','data','segcomp','perc.test.0'))
+%      pc = segcompread(fullfile('..', 'data', 'segcomp', 'perc.test.0'))
 %      pcshow(pc)
 %
 %   See also POINTCLOUD, PCREAD.

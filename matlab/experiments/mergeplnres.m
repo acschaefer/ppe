@@ -15,8 +15,8 @@ fileout = ['extrpln_ids', num2str(ids), '.mat'];
 fprintf('%s + %s -> %s\n', file, file1, fileout);
 
 % Load data files
-plndata = load(fullfile('pcd','result','planeextract',file));
-plndata1 = load(fullfile('pcd','result','planeextract',file1));
+plndata = load(fullfile('result', file));
+plndata1 = load(fullfile('result', file1));
 
 % Load data from first file
 e = plndata.e;
@@ -41,7 +41,7 @@ end
 t(ids,:,3,1) = t1(ids,:,3);
 
 % Save
-outfile = fullfile('pcd','result','planeextract',fileout);
+outfile = fullfile('result',fileout);
 save(outfile, 'e', 'lmax', 'algorithmname', 'msacdist', 'msacperc', 'pln', 't');
 
 fprintf('Done!\n');

@@ -2,7 +2,7 @@ function trainppe
 % TRAINPPE Find optimal parameters for probabilistic plane extraction.
 
 %% Create output directory.
-outdir = fullfile('pcd','result','planeextract');
+outdir = 'result';
 [errorcode,msg] = mkdir(outdir);
 if errorcode < 1
     error(['Failed to create output directory ''', outdir, ''': ', msg])
@@ -10,7 +10,7 @@ end
 
 %% Optimize parameters.
 % Read training datasets.
-data = load(fullfile('pcd','data','planeextract','dataset_train.mat'));
+data = load(fullfile('..', 'data', 'dataset_train.mat'));
 dsidx = [1,5];
 
 % Create parameter grid.

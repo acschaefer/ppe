@@ -17,7 +17,7 @@ resultfile = fullfile(outdir,'paramppe.mat');
 
 %% Optimize plane extraction parameters.
 % Read datasets.
-dataset = load(fullfile('data','dataset_train.mat'));
+dataset = load(fullfile('..', 'data','dataset_train.mat'));
 pc = dataset.pc;
 gtang = dataset.gtang;
 nds = size(pc, 1);

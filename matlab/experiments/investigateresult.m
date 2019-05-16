@@ -1,10 +1,10 @@
 % Load dataset.
-dataset = load(fullfile('pcd','data','planeextract','dataset_test.mat'));
+dataset = load(fullfile('..', 'data', 'dataset_test.mat'));
 pc = dataset.pc;
 gtang = dataset.gtang;
 
 % Load experimental results.
-plndata = load(fullfile('pcd','result','planeextract','extrpln.mat'));
+plndata = load(fullfile('result', 'extrpln.mat'));
 algorithmname = plndata.algorithmname;
 pln = plndata.pln;
 

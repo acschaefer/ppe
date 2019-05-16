@@ -2,7 +2,7 @@ function synpebstat
 % SYNPEBSTAT Compute statistics of SynPEB dataset.
 
 % Read point clouds.
-data = load(fullfile('pcd','data','planeextract','dataset_test.mat'));
+data = load(fullfile('..', 'data', 'dataset_test.mat'));
 pc = data.pc(2,:);
 
 % Compute statistics.

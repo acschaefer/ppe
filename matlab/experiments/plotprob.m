@@ -1,7 +1,7 @@
 % PLOTPROB Create plots to demonstrate problems with SegComp dataset.
 
 % Create data.
-pc = segcompread(fullfile('pcd','data','segcomp','perc.test.23'));
+pc = segcompread(fullfile('..', 'data','segcomp','perc.test.23'));
 [c,~,i] = unique(pc.Intensity(:));
 pc.Color = ind2rgb8(reshape(i,size(pc.Location(:,:,1))),lines);
 seg = permute(pc.Color,[2,1,3]);

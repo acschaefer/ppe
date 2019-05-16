@@ -19,7 +19,7 @@ if errorcode < 1
 end
 
 % Read datasets.
-dataset = load(fullfile('data', 'dataset_test.mat'));
+dataset = load(fullfile('..', 'data', 'dataset_test.mat'));
 pc = dataset.pc;
 
 % Read PPE parameters.

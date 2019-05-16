@@ -1,8 +1,8 @@
 % SEGCOMP2PCD Convert SegComp point clouds to PCD files.
 
 % Load datasets.
-data = [load(fullfile('pcd','data','planeextract','dataset_train.mat')),...
-    load(fullfile('pcd','data','planeextract','dataset_test.mat'))];
+data = [load(fullfile('..', 'data', 'dataset_train.mat')),...
+    load(fullfile('..', 'data', 'dataset_test.mat'))];
 
 % Write training point clouds.
 dataname = {'train', 'test'};
