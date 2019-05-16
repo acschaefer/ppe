@@ -18,6 +18,23 @@ This plane extraction algorithm takes an organized 3-D point cloud as input and 
 To extract planes from an organized point cloud, use the function [`pcextrpln`](./matlab/pcextrpln.m).
 For details about how to use [`pcextrpln`](./matlab/pcextrpln.m), please refer to the detailed documentation in the function header.
 
+In order to accelerate the plane extraction process, it is recommended to compile the CUDA code in the `gpufit` folder.
+For instructions, see the corresponding [readme file](./gpufit/README.md).
+Make sure the resulting `mex` files are on the MATLAB path.
+
+To test the plane extractor, run the following code, which extracts planes from the test data we provide:
+
+```matlab
+% Read the point cloud.
+pc = pcread('../data/test_100.pcd')
+
+% Extract planes.
+res = pcextrpln(pc, 'e', 0.1, 'device', 'gpu')
+
+% Visually compare ground truth and the computed segmentation.
+plotseg(pc, res.plane)
+```
+
 ## [Synthetic Plane Extraction Benchmark](http://synpeb.cs.uni-freiburg.de/)
 
 While testing our plane extraction algorithm and comparing it to other methods, we found out that the well established SegComp dataset exhibits several deficiencies, which are described in our paper.
@@ -38,6 +55,3 @@ They have been tested for MATLAB R2018a.
 1. Run the script [`runexp.m`](./matlab/experiments/runexp.m) to perform the experiments.
 1. To trigger the automatic evaluation of the data generated during the experiments, start the script [`evalexp.m`](./matlab/experiments/evalexp.m).
 1. Visualize the evaluation results by executing the script [`ploteval.m`](./matlab/experiments/ploteval.m).
-
-In order to accelerate the plane extraction process, it is recommended to compile the CUDA code in the `gpufit` folder.
-For instructions, see the corresponding [readme file](./gpufit/README.md).
